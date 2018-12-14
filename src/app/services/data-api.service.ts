@@ -24,7 +24,7 @@ export class DataApiService {
   });
 
   getAllBooks(){
-    const url_api = 'http://127.0.0.1:8000/api/?page=1';
+    const url_api = 'http://127.0.0.1:8000/api/';
     return this.http.get(url_api, {headers: this.headers});
   }
   //https://pokeapi.co/api/v2/pokemon/1/

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   getListBooks(){
-    this.dataApi.getAllBooks().subscribe((books: BookInterface) => (this.books = books['data'], console.log(books)))
+    this.dataApi.getAllBooks().subscribe((books: BookInterface) => (this.books = books['data'], console.log(this.books)))
   }
 
 }

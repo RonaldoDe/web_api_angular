@@ -18,13 +18,13 @@ export class DataApiService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
   headers: HttpHeaders = new HttpHeaders({
-    "Content-Type": "application/json",
     Accept: 'application/json',
+    "Content-Type": "application/json",
     Authorization: 'Bearer' + ' ' + this.authService.getToken()
   });
 
   getAllBooks(){
-    const url_api = 'http://127.0.0.1:8000/api/';
+    const url_api = 'http://127.0.0.1:8000/api/?page=1';
     return this.http.get(url_api, {headers: this.headers});
   }
   //https://pokeapi.co/api/v2/pokemon/1/

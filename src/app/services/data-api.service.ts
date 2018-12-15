@@ -29,13 +29,18 @@ export class DataApiService {
   }
   //https://pokeapi.co/api/v2/pokemon/1/
   getBookById(id: string){
-    const url_api = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+    const url_api = `http://127.0.0.1:8000/api/post/${id}/`;
+    return this.http.get(url_api, {headers: this.headers});
+  }
+
+  getOffers(){
+    const url_api = `http://127.0.0.1:8000/api/offerts`;
     return this.http.get(url_api, {headers: this.headers});
   }
 
   saveBook(book: BookInterface){
     let token = this.authService.getToken();
-    const url_api = "http://127.0.0.1:8000/api/post";
+    const url_api = "http://127.0.0.1:8000/api/save";
     return this.http.post<BookInterface>(url_api, book, {headers: this.headers}).pipe(map(data => data));
   }
 

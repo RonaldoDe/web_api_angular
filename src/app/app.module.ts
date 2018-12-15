@@ -14,6 +14,7 @@ import { RegisterComponent } from './component/user/register/register.component'
 import { ProfileComponent } from './component/user/profile/profile.component';
 import { Page404Component } from './component/page404/page404.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 //services
 import { DataApiService } from './services/data-api.service';
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [DataApiService],
   bootstrap: [AppComponent]

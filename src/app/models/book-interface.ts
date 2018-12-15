@@ -1,7 +1,6 @@
 export interface BookInterface{
     name?: string;
-    slug?: string;
-    except?: string;
     body?: string;
+    file?: string;
     id?: string;
 }

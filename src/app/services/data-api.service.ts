@@ -20,7 +20,7 @@ export class DataApiService {
   headers: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     "Content-Type": "application/json",
-    Authorization: 'Bearer' + ' ' + this.authService.getToken()
+    Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
   });
 
   getAllBooks(){
@@ -28,6 +28,7 @@ export class DataApiService {
     return this.http.get(url_api, {headers: this.headers});
   }
   //https://pokeapi.co/api/v2/pokemon/1/
+
   getBookById(id: string){
     const url_api = `http://127.0.0.1:8000/api/post/${id}/`;
     return this.http.get(url_api, {headers: this.headers});

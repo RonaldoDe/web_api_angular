@@ -6,14 +6,21 @@ import { isNullOrUndefined } from 'util';
 
 
 import { UserInterface } from "../models/user-interface";
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json"
+  });
+
+  header: HttpHeaders = new HttpHeaders({
+    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
   });
 
   registerUser(name: string, email: string, password: string){
@@ -32,20 +39,15 @@ export class AuthService {
     return this.http.post<UserInterface>(url_api, {
       username, 
       password
-    }, 
-    {headers: this.headers}).pipe(map(data => data));
+    } 
+    );
   }
 
-  setToken(token): void{
+  setToken(token: string): void{
     localStorage.setItem("token", token)
   }
 
-  setUser(user:UserInterface): void{
-    let user_string = JSON.stringify(user);
-    localStorage.setItem("CurrentUser", user_string);
-  }
-
-  getToken(){
+    getToken(){
     return localStorage.getItem("token");
   }
 
@@ -60,11 +62,10 @@ export class AuthService {
   }
 
   logoutUser(){
-    let accessToken = localStorage.getItem('token');
     const url_api = "http://127.0.0.1:8000/api/logout";
+    this.http.get(url_api, {headers: this.header});
     localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    return this.http.post<UserInterface>(url_api, {headers: this.headers})
+    this.router.navigate(['user/login']);
   }
 
 }

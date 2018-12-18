@@ -30,7 +30,7 @@ export class AuthService {
         email:email, 
         password:password
       }, 
-      { headers: this.headers }
+      { headers: this.header }
       ).pipe(map(data => data));
   }
 
@@ -43,6 +43,7 @@ export class AuthService {
     );
   }
 
+
   setToken(token: string): void{
     localStorage.setItem("token", token)
   }
@@ -51,11 +52,11 @@ export class AuthService {
     return localStorage.getItem("token");
   }
 
-  getCurrentUser():UserInterface{
-    let user_string = localStorage.getItem("CurrentUSer");
+  getCurrentUser(){
+    let user_string = localStorage.getItem('user');
     if(!isNullOrUndefined(user_string)){
-        let user: UserInterface = JSON.parse(user_string);
-        return user;
+      let user = JSON.parse(user_string);
+      return user;
     }else{
       return null;
     }
@@ -65,6 +66,7 @@ export class AuthService {
     const url_api = "http://127.0.0.1:8000/api/logout";
     this.http.get(url_api, {headers: this.header});
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['user/login']);
   }
 

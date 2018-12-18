@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { DataApiService } from 'src/app/services/data-api.service';
 import { UserInterface } from 'src/app/models/user-interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +10,21 @@ import { UserInterface } from 'src/app/models/user-interface';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private dataApiService: DataApiService, private authService: AuthService) { }
 
-  user: UserInterface;
+  private user :  UserInterface;
 
   ngOnInit() {
-    this.user = this.authService.getCurrentUser();
+    this.getProfile();
+  }
+
+  getProfile(){
+    this.dataApiService.getProfile().subscribe(user => (
+      localStorage.setItem("user", JSON.stringify(user))
+      ));
+
+      this.user = this.authService.getCurrentUser();
+    
   }
 
 }

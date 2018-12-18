@@ -27,6 +27,11 @@ export class DataApiService {
     const url_api = 'http://127.0.0.1:8000/api/';
     return this.http.get(url_api, {headers: this.headers});
   }
+
+  getProfile(){
+    const url_api = 'http://127.0.0.1:8000/api/profile';
+    return this.http.get(url_api, {headers: this.headers});
+  }
   //https://pokeapi.co/api/v2/pokemon/1/
 
   getBookById(id: string){
